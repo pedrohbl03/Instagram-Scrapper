@@ -1,4 +1,5 @@
 const config = require('./src/config/AppConfig.js');
+const { getPagePosts } = require('./src/services/puppeteer.service')
 const routes = require('./src/routes/v1/index');
 const express = require('express');
 const cronJob = require('cron').CronJob;
@@ -20,9 +21,6 @@ app.listen(config.port, () => console.log('listening on port ' + config.port));
 job.start(); */
 
 
-
-
-
-
 /* 16:30 Start - 19:30 End */
-/* 15:00 Start - End */
+/* 15:00 Start - 17:57 End */
+/* 16:22 Start - 20:00 End */
