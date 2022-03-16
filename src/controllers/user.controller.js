@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const { getPagePosts } = require('../services/puppeteer.service')
+const { getPagePosts } = require('../services/posts.service')
 
 const setUserController = async (req, res) => {
   res.status(httpStatus.CREATED).send('User set: ' + JSON.stringify(req.body));
@@ -7,7 +7,7 @@ const setUserController = async (req, res) => {
 
 const getUserController = async (req, res) => {
   const posts = await getPagePosts('pedro.limaa_', 'sitecefa')
-  res.send(posts);
+  res.send(JSON.stringify(posts, null, 4));
 }
 
 module.exports = {
