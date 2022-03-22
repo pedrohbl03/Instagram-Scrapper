@@ -1,3 +1,4 @@
+const download = require('../utils/downloadFunction');
 const puppeteer = require('puppeteer');
 const toJsonPosts = require('../utils/ArrayToJsonPosts')
 
@@ -8,24 +9,22 @@ const getPageToSearch = async (hashtag) => {
   return page;
 }
 
+
 const getPagePosts = async (user, hashtag) => {
   const page = await getPageToSearch(hashtag);
 
-  const postsLinks = await page.$$eval(('.v1Nh3 a'), elements => {
-    return elements.map(post => post.href);
-  });
-  const postsImages = await page.$$eval(('.v1Nh3 a .eLAPa .KL4Bh img'), elements => {
-    return elements.map(post => post.src);
-  });
-  /* await page.close(); */
+  await page.waitForSelector('.v1Nh3 a');
+  const postsLinks = await page.$$eval(('.v1Nh3 a'), elements => elements.map(post => post.href));
+  const postsImages = await page.$$eval(('.v1Nh3 a .eLAPa .KL4Bh img'), elements => elements.map(post =>post.src ));
 
-  const posts = await toJsonPosts({ postsLinks, postsImages });
+  const localImages = await Promise.all(postsImages.map(async (post, index) => await download(post, `./public/images/images-${index}.png`)));
+  
+ /*  await page.close(); */
+
+  const posts = await toJsonPosts({ postsLinks });
 
   return posts;
 }
-
-
-
 
 
 module.exports = {

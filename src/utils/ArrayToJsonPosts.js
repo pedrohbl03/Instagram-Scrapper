@@ -1,9 +1,9 @@
-const toJsonPosts = async ({ postsLinks, postsImages }) => {
+const toJsonPosts = async ({ postsLinks }) => {
   let posts = []
   await postsLinks.forEach((postLink, index) => (
     posts.push({
         link: postLink,
-        image: postsImages[index]
+        image: `https://localhost:3030/assets/images-${index}.png`
       })
   ))
 
