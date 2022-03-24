@@ -1,13 +1,14 @@
+let { Posts } = require('../global/globalVariables')
+
 const toJsonPosts = async ({ postsLinks }) => {
-  let posts = []
   await postsLinks.forEach((postLink, index) => (
-    posts.push({
+    Posts.push({
         link: postLink,
         image: `https://localhost:3030/assets/images-${index}.png`
       })
   ))
 
-  return posts
+  return Posts
 }
 
 module.exports = toJsonPosts

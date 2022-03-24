@@ -1,7 +1,13 @@
 const fs = require('fs');
 const https = require('https');
 
-const download = (url, destination) => new Promise((resolve, reject) => {
+const removeAssets = async (assets) => fs.unlink(`./public/images/${assets}`, (error) => {
+  if (error) throw error 
+})
+
+const readAssets = async () => fs.readdirSync('./public/images')
+
+const getAssets = (url, destination) => new Promise((resolve, reject) => {
   const file = fs.createWriteStream(destination);
 
   https.get(url, response => {
@@ -17,5 +23,8 @@ const download = (url, destination) => new Promise((resolve, reject) => {
   });
 });
 
-
-module.exports = download;
+module.exports = {
+  removeAssets,
+  readAssets,
+  getAssets
+}

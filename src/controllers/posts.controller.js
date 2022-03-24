@@ -1,15 +1,10 @@
 const httpStatus = require('http-status');
-const { getPagePosts } = require('../services/posts.service')
-
-const setUserController = async (req, res) => 
-  res.status(httpStatus.CREATED).send('User set: ' + JSON.stringify(req.body));
+const { Posts } = require('../global/globalVariables')
 
 const getPostsController = async (req, res) => {
-  const posts = await getPagePosts('pedro.limaa_', 'sitecefa')
-  res.send(JSON.stringify(posts, null, 4));
+  res.send(JSON.stringify(Posts, null, 4));
 }
 
 module.exports = {
-  setUserController,
   getPostsController
 }

@@ -1,8 +1,17 @@
-export const setUserService = () => {
-  
+let { User } = require('../global/globalVariables')
+
+const setUserService = (user, hashtag) => {
+  User = {
+    user,
+    hashtag
+  }
 }
 
-export const getUserService = () => {
-  
+const getUserService = () => User
+
+module.exports = {
+  setUserService,
+  getUserService
 }
+
 
