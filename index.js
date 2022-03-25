@@ -27,7 +27,7 @@ app.use('/v1', routes);
 
 app.listen(config.port, () => console.log('listening on port ' + config.port));
 
-const job = new cronJob('30/30 * * * * *', async () => {
+const job = new cronJob('0 08 1/1 * *', async () => { // cron 0 08 1/1 * * -> every day 1-31 at 8:00 AM
   let { user, hashtag } = getUserService();
 
   resetPosts();
